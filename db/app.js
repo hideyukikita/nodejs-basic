@@ -7,7 +7,7 @@ async function getUsers() {
     try {
         //データベースに接続
         connection = await mysql.createConnection({
-            host: '10.255.255.254', // ホスト名
+            host: 'localhost', // ホスト名
             port: 3306, // ポート番号
             user: 'root', // MySQLのユーザー名
             password: '', // MySQLのパスワード
@@ -20,7 +20,7 @@ async function getUsers() {
         const [rows] = await connection.execute('SELECT * FROM users;');
 
         // 取得したデータを表示
-        console.log(`usersテーブルのデータ: ${rows}`);
+        console.log(`usersテーブルのデータ:`, rows);
     } catch(error) {
         console.error(`データベース操作エラー: `, error);
     } finally {
