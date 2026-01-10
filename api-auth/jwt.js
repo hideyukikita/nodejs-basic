@@ -19,7 +19,7 @@ function generateToken(payload){
 // このミドルウェアを適用したルートは、有効なJWTを含むリクエストのみがアクセス可能
 function verifyToken(req, res, next) {
     // リクエスト内のクッキー情報からトークンを取得
-    const token = req.cookie.authToken;
+    const token = req.cookies.authToken;
     if (!token) {
         return res.status(401).json({ message: '認証トークンがありません' });
     }

@@ -63,7 +63,7 @@ router.post('/login', async(req,res) => {
         // トークンをクッキーに保存(ブラウザへ指示出し)
         res.cookie('authToken', token, {
             httpOnly: true, //JavaScriptからのアクセスを禁止(XSS対策)
-            secure: true, // 暗号化されたHTTPSでのみ送信(盗聴リスク低減)
+            secure: false, // 暗号化されたHTTPSでのみ送信(盗聴リスク低減)
             sameSite: 'strict', // 別サイトからのリクエスト時にクッキーを送信しない(CSRF対策)
             maxAge: 60 * 60 * 1000, //有効期限(1時間)
         });
@@ -78,7 +78,7 @@ router.post('/login', async(req,res) => {
 // ログイン済みユーザー自身の情報を取得
 router.get('/my-info', jwt.verifyToken, (req, res) => {
     // トークン検証OKならユーザーデータ返却
-    res.json({ id: req.body.id, username: req.body.username });
+    res.json({ id: req.user.id, username: req.user.username });
 });
 
 
